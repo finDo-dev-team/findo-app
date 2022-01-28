@@ -3,7 +3,7 @@
 # Findo
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://github.com/finDo-dev-team/findo-app/actions/workflows/laravel.yml/badge.svg?branch=master" alt="Build Status"></a>
+<a href="https://github.com/finDo-dev-team/findo-app/actions/workflows/laravel.yml"><img src="https://github.com/finDo-dev-team/findo-app/actions/workflows/laravel.yml/badge.svg?branch=master" alt="Build Status"></a>
 </p>
 
 ## A propos de Findo
