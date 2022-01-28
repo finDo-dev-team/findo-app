@@ -23,16 +23,20 @@ class ODPExtractor
         $this->records = $response['records'];
 
         foreach ($this->records as $record) {
-            $this->createEventFromRecord($record);
+            $this->createOrUpdateEventFromRecord($record);
         }
 
+        Log::info('ODPExtractor terminated!');
     }
 
-    private function createEventFromRecord(array $record): void
+    private function createOrUpdateEventFromRecord(array $record): void
     {
         $fields = $record['fields'];
 
-        $odpEvent = new ODPEvent();
+        $odpEvent = ODPEvent::where('odpID', $fields['id'])->first();
+
+        if($odpEvent == NULL) $odpEvent = new ODPEvent();
+
         $odpEvent->odpID = $fields['id'];
         $odpEvent->url = $fields['url'];
         $odpEvent->title = $fields['title'];

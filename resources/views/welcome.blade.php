@@ -13,11 +13,11 @@
             @if (Route::has('login'))
                 @auth
                     <div><a href="{{ url('/dashboard') }}"
-                            class="text-gray-400 text-s underline">Accéder à
+                            class="text-gray-500 text-s underline">Accéder à
                             votre tableau de bord</a></div>
                 @else
                     @if (Route::has('register'))
-                        <div class="text-gray-400 dark:text-gray-100 text-s">
+                        <div class="text-gray-500 text-s">
                             <a href="{{ route('register') }}" class="underline">Créez un compte</a> ou <a
                                 href="{{ route('login') }}" class="underline">connectez vous</a> pour commencer.
                         </div>
