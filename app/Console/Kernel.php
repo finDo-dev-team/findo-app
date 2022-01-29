@@ -16,7 +16,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(new ODPExtractor)->everyMinute();
+        $schedule->call(new ODPExtractor)
+                 ->timezone('Europe/Paris')
+                 ->everyMinute();
     }
 
     /**
