@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->call(new ODPExtractor)
                  ->timezone('Europe/Paris')
+                 ->name('ODP Extract')
                  ->everyMinute();
     }
 
