@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\ODPEvent;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
 class ODPEventController extends Controller
@@ -13,12 +13,13 @@ class ODPEventController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $req_date_min = $request->date_min != NULL ? $request->date_min : Carbon::now();
-        $req_date_max = $request->date_max != NULL ? $request->date_max : Carbon::now()->addCentury();
+        $req_date_min = $request->date_min != NULL ? $request->date_min : Carbon::now()->toDateString();
+        $req_date_max = $request->date_max != NULL ? $request->date_max : Carbon::now()->addMonth()->toDateString();
         $req_title = $request->title != NULL ? $request->title : "";
         $req_tag = $request->tag != NULL ? $request->tag : "";
 
@@ -29,10 +30,12 @@ class ODPEventController extends Controller
                         ->where('tags', 'like', '%' . $req_tag . '%')
                         ->get();
 
-        //dd($odpEvents->count());
-
         return View::make('odpEvent.index', [
-            'odpEvents' => $odpEvents
+            'odpEvents' => $odpEvents,
+            'search_title' => $req_title,
+            'search_tag' => $req_tag,
+            'search_date_min' => $req_date_min,
+            'search_date_max' => $req_date_max
         ]);
     }
 
