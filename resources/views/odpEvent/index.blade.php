@@ -25,7 +25,9 @@
                         <label>Date fin</label>
                         <input type="date" id="search_date_end" value="{{ $search_date_max }}">
                     </div>
-                    <button class="mt-2" onclick="search()">Rechercher</button>
+                    <button
+                        class="mt-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                        onclick="search()">Rechercher</button>
                 </div>
             </div>
         </div>
@@ -37,6 +39,7 @@
                         <div class="flex flex-row">
                             <div class="basis-2/3 p-2">
                                 <p class="text-xl">{{ $event->title }}</p>
+                                <a href="{{ route('odpEvents.show', ['odpEvent' => $event])}}" class="text-blue-900">+ d'infos...</a>
                                 <p class="text-gray-500 text-xs">tags:
                                     {{ Str::lower(Str::replace(';', ', ', $event->tags)) }}</p>
                                 <p class="text-gray-700 text-sm">{!! Str::limit($event->date_description, 100) !!}</p>
@@ -69,10 +72,10 @@
         let search_date_start = getElementValue("search_date_start")
         let search_date_end = getElementValue("search_date_end")
 
-        if(search_title != "") url.searchParams.set("title", search_title)
-        if(search_tag != "") url.searchParams.set("tag", search_tag)
-        if(search_date_start != "") url.searchParams.set("date_min", search_date_start)
-        if(search_date_end != "") url.searchParams.set("date_max", search_date_end)
+        if (search_title != "") url.searchParams.set("title", search_title)
+        if (search_tag != "") url.searchParams.set("tag", search_tag)
+        if (search_date_start != "") url.searchParams.set("date_min", search_date_start)
+        if (search_date_end != "") url.searchParams.set("date_max", search_date_end)
 
         window.location.replace(url);
     }
