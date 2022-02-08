@@ -13,9 +13,11 @@
                     Bienvenue sur votre tableau de bord !
                 </div>
                 <div id="mon-chart" style="height: 500px; width: 800px;"></div>
+                <div id="mon-chart-bar" style="height: 500px; width: 800px;"></div>
             </div>
         </div>
     </div>
+    <!-- Implémentation du diagram camembert-->
     <script type="text/javascript">
         google.charts.load('current', {
             'packages': ['corechart']
@@ -24,12 +26,11 @@
 
         function drawChart() {
 
-      
             let countTagsObj = {!! json_encode($countTags) !!}
             let countTags = Object.entries(countTagsObj);
-            countTags.unshift(['Tag','Count'])
-            
-            var data = google.visualization.arrayToDataTable(countTags); 
+            countTags.unshift(['Tag', 'Count'])
+
+            var data = google.visualization.arrayToDataTable(countTags);
 
             let options = {
                 title: 'Répartition des tags', // Le titre
@@ -43,4 +44,26 @@
             chart.draw(data, options);
         }
     </script>
+
+       <!-- Implémentation du diagram bar chart-->
+       <script type="text/javascript">
+        google.charts.load('current', {'packages':['bar']});
+        google.charts.setOnLoadCallback(drawChart);
+      
+        function drawChart() {
+            let countTagsObj = {!! json_encode($countTags) !!}
+            let countTags = Object.entries(countTagsObj);
+            countTags.unshift(['Tag', 'Count'])
+      
+        var data = google.visualization.arrayToDataTable(countTags);
+        let options = {
+              title: 'Répartition des tags',
+            bars: 'vertical' // Direction "verticale" pour les bars
+          };
+      
+          let chart = new google.charts.Bar(document.getElementById('mon-chart-bar'));
+      
+          chart.draw(data, google.charts.Bar.convertOptions(options));
+        }
+      </script>
 </x-app-layout>
