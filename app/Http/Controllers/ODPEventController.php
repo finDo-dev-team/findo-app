@@ -51,4 +51,10 @@ class ODPEventController extends Controller
             'odpEvent' => $odpEvent
         ]);
     }
+
+    public function diagram () {
+
+		// La vue "diagram"
+		return view("diagram", compact('odpEvents'));
+    } 
 }

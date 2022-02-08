@@ -25,7 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('odpEvents', ODPEventController::class)
-    ->only(['index', 'show'])
+    ->only(['index', 'show', 'diagram'])
     ->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
