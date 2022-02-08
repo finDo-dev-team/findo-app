@@ -39,7 +39,7 @@
                         <div class="flex flex-row">
                             <div class="basis-2/3 p-2">
                                 <p class="text-xl">{{ $event->title }}</p>
-                                <a href="{{ route('odpEvents.show', ['odpEvent' => $event])}}" class="text-blue-900">+ d'infos...</a>
+                                <a href="{{ route('odpEvents.show', ['odpEvent' => $event])}}" class="text-rose-700">+ d'infos...</a>
                                 <p class="text-gray-500 text-xs">tags:
                                     {{ Str::lower(Str::replace(';', ', ', $event->tags)) }}</p>
                                 <p class="text-gray-700 text-sm">{!! Str::limit($event->date_description, 100) !!}</p>
