@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Models\ODPEvent;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
+use App\Providers\RouteServiceProvider;
 
 class DashboardController extends Controller
 {
 
-    public function diagram () {
+    public function index() {
 
-		// Les catégories avec les produits. On peut aussi utiliser la méthode withCount() d'Eloquent
-		$ODPEvents = ODPEvent::with("events")->get();
-
-		// La vue "diagram" avec les catégories
-		return view("diagram", compact('ODPEvents'));
+		$odpEvents = ODPEvent::all();
+        $eventCount = ODPEvent::count();
+        return View::make('dashboard', [
+            'odpEvents' => $odpEvents,
+            'eventCount' => $eventCount
+        ]);
     }
 }
