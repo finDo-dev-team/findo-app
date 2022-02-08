@@ -10,8 +10,7 @@
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="shadow-md overflow-hidden">
                     <div class="mx-auto max-h-full w-6" style="width: 30rem">
-                        <img src="{{ $odpEvent->cover_url }}"
-                            alt="{{ $odpEvent->cover_alt }}"
+                        <img src="{{ $odpEvent->cover_url }}" alt="{{ $odpEvent->cover_alt }}"
                             class="rounded-full">
                     </div>
 
