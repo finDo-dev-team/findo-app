@@ -15,9 +15,19 @@ class DashboardController extends Controller
 
 		$odpEvents = ODPEvent::all();
         $eventCount = ODPEvent::count();
+        
+        
+        $listeTags = ["Clubbing","Atelier","Humour","Concert","Musique","Danse","Théâtre","Conférence","Enfants","Sport","Cinéma","Loisirs","Littérature","Spectacle musical","Balade","Histoire","Nature","Art contemporain","Expo","LGBT","Peinture","Photo","Innovation","Cirque","BD","Sciences","Solidarité","Salon","Street-art","Gourmand"];
+        $countTags = array();
+        foreach ($listeTags  as $tag) {
+            $countTags[$tag]= ODPEvent::where('tags', 'like','%'.$tag.'%')->count();
+        }        
+        
         return View::make('dashboard', [
             'odpEvents' => $odpEvents,
-            'eventCount' => $eventCount
+            'eventCount' => $eventCount,
+            'listeTags' => $listeTags,
+            'countTags' => $countTags
         ]);
     }
 }
