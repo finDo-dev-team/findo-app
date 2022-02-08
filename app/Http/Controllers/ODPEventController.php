@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\ODPEvent;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
 
 class ODPEventController extends Controller
 {
@@ -24,11 +25,11 @@ class ODPEventController extends Controller
         $req_tag = $request->tag != NULL ? $request->tag : "";
 
         $odpEvents = ODPEvent::orderBy('date_start')
-                        ->where('date_end', '>', $req_date_min)
-                        ->where('date_start', '<', $req_date_max)
-                        ->where('title', 'like', '%'.$req_title.'%')
-                        ->where('tags', 'like', '%' . $req_tag . '%')
-                        ->get();
+            ->where('date_end', '>', $req_date_min)
+            ->where('date_start', '<', $req_date_max)
+            ->where('title', 'like', '%' . $req_title . '%')
+            ->where('tags', 'like', '%' . $req_tag . '%')
+            ->get();
 
         return View::make('odpEvent.index', [
             'odpEvents' => $odpEvents,
@@ -47,6 +48,21 @@ class ODPEventController extends Controller
      */
     public function show(ODPEvent $odpEvent)
     {
+        return View::make('odpEvent.show', [
+            'odpEvent' => $odpEvent
+        ]);
+    }
+
+    /**
+     * Make the current user liking the event
+     *
+     * @param \App\Models\ODPEvents
+     * @return \Illuminate\Http\Response
+     */
+    public function like(ODPEvent $odpEvent)
+    {
+        Auth::user()->likedEvents()->attach($odpEvent->id);
+
         return View::make('odpEvent.show', [
             'odpEvent' => $odpEvent
         ]);
