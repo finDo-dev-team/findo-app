@@ -63,6 +63,7 @@ class UserSeeder extends Seeder
          * Lecture des données users depuis le fichier JSON
          */
         $users = json_decode(file_get_contents('database/seeders/users.json'), true);
+        $users = array_slice($users, 0, 1000); // limite à 1000  users
 
         /**
          * Création des users
