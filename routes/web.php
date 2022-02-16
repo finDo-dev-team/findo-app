@@ -27,4 +27,8 @@ Route::resource('odpEvents', ODPEventController::class)
     ->only(['index', 'show'])
     ->middleware(['auth']);
 
+Route::post('/likeEvent/{odpEvent}', [ODPEventController::class, 'likeOrUnlike'])
+    ->name('likeEvent')
+    ->middleware(['auth']);
+
 require __DIR__ . '/auth.php';

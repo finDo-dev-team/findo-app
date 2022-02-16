@@ -45,6 +45,8 @@ class User extends Authenticatable
 
     /**
      * The events liked by the user.
+     *
+     * @return Illuminate\Database\Eloquent\Concerns\HasRelationships::belongsToMany
      */
     public function likedEvents()
     {

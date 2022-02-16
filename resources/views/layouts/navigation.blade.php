@@ -17,8 +17,8 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('odpEvents.index')" :active="request()->routeIs('odpEvents.index')">
-                        {{ __('Evenements') }}
+                    <x-nav-link :href="route('odpEvents.index')" :active="request()->routeIs('odpEvents.index') || request()->routeIs('odpEvents.show')">
+                        {{ __('Evénements') }}
                     </x-nav-link>
                 </div>
             </div>
