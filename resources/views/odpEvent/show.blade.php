@@ -1,13 +1,39 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-900 leading-tight">
             {{ __($odpEvent->title) }}
         </h2>
+        <h3 class=" text-sm text-gray-900 leading-tight">
+            {{ __($odpEvent->address_name) }}
+        </h3>
+        <div class="text-xs text-gray-700">
+            {!! $odpEvent->date_description !!}
+        </div>
         <div>
-            <form action="submit"></form>
-            <button href="#" class="bg-green-700 hover:bg-green-600 text-white text-center py-2 px-4 rounded-full">
-                <span>J'AIME</span><span class="text-xs text-green-200">(7)</span>
-            </button>
+            <form method="POST" action="{{ route('likeEvent', [$odpEvent]) }}">
+                @csrf
+                @if (Auth::user()->likedEvents->contains($odpEvent->id))
+                    <button type="submit"
+                        class="
+                            bg-indigo-500 text-white font-semibold
+                            hover:bg-transparent hover:border-red-600 hover:text-red-600
+                            py-1 px-2 border rounded
+                            ">
+                        <span>❤️</span>
+                        <span class="text-xs font-extrabold">({{ $odpEvent->likedBy->count() }})</span>
+                    </button>
+                @else
+                    <button type="submit"
+                        class="
+                            bg-transparent text-indigo-500 border-indigo-500 font-semibold
+                            hover:bg-indigo-500 hover:text-white hover:border-transparent
+                            py-1 px-2 border rounded">
+                        <span>❤️</span>
+                        <span class="text-xs">({{ $odpEvent->likedBy->count() }})</span>
+                    </button>
+                @endif
+
+            </form>
         </div>
     </x-slot>
     <div class="py-12">
@@ -17,7 +43,7 @@
                 <div class="shadow-md overflow-hidden">
                     <div class="mx-auto max-h-full w-6" style="width: 30rem">
                         <img src="{{ $odpEvent->cover_url }}" alt="{{ $odpEvent->cover_alt }}"
-                            class="rounded-full">
+                            class="rounded-2xl">
                     </div>
                     <table class="table-auto min-w-full divide-y divide-neutral-700  mt-2">
                         <thead class="bg-white">
