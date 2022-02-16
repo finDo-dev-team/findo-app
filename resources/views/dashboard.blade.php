@@ -14,10 +14,11 @@
                 </div>
                 <div id="mon-chart" style="height: 500px; width: 800px;"></div>
                 <div id="mon-chart-bar" style="height: 500px; width: 800px;"></div>
+                <div id="mon-chart-like" style="height: 500px; width: 800px;"></div>
             </div>
         </div>
     </div>
-    <!-- Implémentation du diagram camembert-->
+    <!-- Implémentation du diagram camembert pour les tags-->
     <script type="text/javascript">
         google.charts.load('current', {
             'packages': ['corechart']
@@ -66,4 +67,55 @@
           chart.draw(data, google.charts.Bar.convertOptions(options));
         }
       </script>
+
+
+ <!-- Implémentation du diagram camembert pour les likes-->
+ <script type="text/javascript">
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        let countLikeObj = {!! json_encode($likeCount) !!}
+        let likeCount = Object.entries(countLikeObj);
+        likeCount.unshift(['Tag', 'Count'])
+
+        var data = google.visualization.arrayToDataTable(likeCount);
+
+        let options = {
+            title: 'Le nombre de like par type événement', // Le titre
+            is3D: true // En 3D
+        };
+
+        // On crée le chart en indiquant l'élément où le placer "#mon-chart"
+        let chart = new google.visualization.PieChart(document.getElementById('mon-chart-like'));
+
+        // On désine le chart avec les données et les options
+        chart.draw(data, options);
+    }
+</script>
+
+  <!-- Implémentation du diagram bar chart like-->
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+  
+    function drawChart() {
+        let countTagsObj = {!! json_encode($countTags) !!}
+        let countTags = Object.entries(countTagsObj);
+        countTags.unshift(['Nom du Tag', 'Nombres événements'])
+  
+    var data = google.visualization.arrayToDataTable(countTags);
+    let options = {
+          title: 'Répartition des tags',
+          bars: 'vertical' // Direction "verticale" pour les bars
+      };
+  
+      let chart = new google.charts.Bar(document.getElementById('mon-chart-bar'));
+  
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+  </script>
 </x-app-layout>
