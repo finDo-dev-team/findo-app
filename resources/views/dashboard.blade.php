@@ -53,7 +53,7 @@
         function drawChart() {
             let countTagsObj = {!! json_encode($countTags) !!}
             let countTags = Object.entries(countTagsObj);
-            countTags.unshift(['Tag', 'Count'])
+            countTags.unshift(['Nom de Tag', 'Nombre événements'])
       
         var data = google.visualization.arrayToDataTable(countTags);
         let options = {
