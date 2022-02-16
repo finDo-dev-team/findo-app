@@ -21,8 +21,8 @@ class DashboardController extends Controller
         $countTags = array();
         foreach ($listeTags  as $tag) {
             $countTags[$tag]= ODPEvent::where('tags', 'like','%'.$tag.'%')->count();
-        }        
-        
+        }
+            
         return View::make('dashboard', [
             'odpEvents' => $odpEvents,
             'eventCount' => $eventCount,

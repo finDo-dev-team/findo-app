@@ -53,12 +53,12 @@
         function drawChart() {
             let countTagsObj = {!! json_encode($countTags) !!}
             let countTags = Object.entries(countTagsObj);
-            countTags.unshift(['Nom de Tag', 'Nombre événements'])
+            countTags.unshift(['Nom du Tag', 'Nombres événements'])
       
         var data = google.visualization.arrayToDataTable(countTags);
         let options = {
               title: 'Répartition des tags',
-            bars: 'vertical' // Direction "verticale" pour les bars
+              bars: 'vertical' // Direction "verticale" pour les bars
           };
       
           let chart = new google.charts.Bar(document.getElementById('mon-chart-bar'));
