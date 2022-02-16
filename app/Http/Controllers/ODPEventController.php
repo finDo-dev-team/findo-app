@@ -7,7 +7,6 @@ use App\Models\ODPEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Redirect;
 
 class ODPEventController extends Controller
 {
@@ -59,12 +58,16 @@ class ODPEventController extends Controller
      * @param \App\Models\ODPEvents
      * @return \Illuminate\Http\Response
      */
-    public function like(ODPEvent $odpEvent)
+    public function likeOrUnlike(ODPEvent $odpEvent)
     {
-        Auth::user()->likedEvents()->attach($odpEvent->id);
+        $currentUser = Auth::user();
 
-        return View::make('odpEvent.show', [
-            'odpEvent' => $odpEvent
-        ]);
+        if ($currentUser->likedEvents->contains($odpEvent->id)) {
+            $currentUser->likedEvents()->detach($odpEvent->id);
+        } else {
+            $currentUser->likedEvents()->attach($odpEvent->id);
+        }
+
+        return redirect()->route('odpEvents.show', ['odpEvent' => $odpEvent]);
     }
 }
