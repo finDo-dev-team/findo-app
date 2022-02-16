@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $currentUser = Auth::user();
         $likeCount = array();
         foreach ($listeTags  as $tag1) {
-            $likeCount[$tag1]= $currentUser->likedEvents()->where('tags', 'like','%'.$tag.'%')->count();
+            $likeCount[$tag1]= $currentUser->likedEvents()->where('tags', 'like','%'.$tag1.'%')->count();
         }
 
         
