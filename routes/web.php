@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\ODPEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ODPEventController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +21,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::resource('odpEvents', ODPEventController::class)
     ->only(['index', 'show'])
+    ->middleware(['auth']);
+
+Route::post('/likeEvent/{odpEvent}', [ODPEventController::class, 'likeOrUnlike'])
+    ->name('likeEvent')
     ->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
