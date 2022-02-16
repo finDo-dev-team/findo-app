@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class UserSeeder extends Seeder
 {
 
-    private static $eventTypes = [
+    public static $eventTypes = [
         'Clubbing',
         'Atelier',
         'Humour',

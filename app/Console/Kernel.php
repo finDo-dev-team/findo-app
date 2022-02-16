@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Tasks\ODPExtractor;
+use App\Tasks\MachineLearningService;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,9 +18,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(new ODPExtractor)
-                 ->timezone('Europe/Paris')
-                 ->name('ODP Extract')
-                 ->everyMinute();
+            ->timezone('Europe/Paris')
+            ->name('ODP Extract execution')
+            ->everyMinute();
+
+        $schedule->call(new MachineLearningService)
+            ->timezone('Europe/Paris')
+            ->name('ML Service execution')
+            ->everyMinute();
     }
 
     /**
@@ -29,7 +35,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
