@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class ODPExtractor
 {
-    private static $queryNext2WeeksEvents = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=date_start+%3E+%23now()+AND+date_start+%3C%3D+%23now(weeks%3D%2B2)&rows=1000';
+    private static $queryNext2WeeksEvents = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=date_start+%3E+%23now()+AND+date_start+%3C%3D+%23now(weeks%3D%2B2)&rows=10000';
+    private static $query2022 = 'https://opendata.paris.fr/api/records/1.0/search/?dataset=que-faire-a-paris-&q=date_start%3A[2021-12-31T23%3A00%3A00Z+TO+2022-12-31T22%3A59%3A59Z]&rows=10000';
 
     public function __invoke()
     {
@@ -16,7 +17,7 @@ class ODPExtractor
 
         $records = array();
 
-        $response = Http::get(ODPExtractor::$queryNext2WeeksEvents);
+        $response = Http::get(self::$query2022);
 
         $records = $response['records'];
 
