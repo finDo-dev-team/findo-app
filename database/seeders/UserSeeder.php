@@ -79,6 +79,7 @@ class UserSeeder extends Seeder
                     'email' => $userArray['nom'] . '.' . $userArray['prenom'] . '@findo.fr',
                     'age' => $userArray['age'],
                     'ville' => $userArray['ville'],
+                    'cluster' => -1,
                     'password' => Hash::make("password"),
                 ]);
             } catch (Exception $e) {

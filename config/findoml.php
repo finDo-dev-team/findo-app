@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'api_url' => 'https://localhost'
+    'api_url' => 'http://127.0.0.1:5000/ml'
 ];

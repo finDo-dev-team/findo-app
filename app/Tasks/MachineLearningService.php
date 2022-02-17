@@ -4,11 +4,13 @@ namespace App\Tasks;
 
 use App\Models\User;
 use Database\Seeders\UserSeeder;
+use Illuminate\Support\Facades\Http;
 
 class MachineLearningService
 {
     public function __invoke()
     {
+        /*
         $users = User::all();
 
         $usersArray = array();
@@ -32,7 +34,16 @@ class MachineLearningService
             }
             array_push($usersArray, $userArray);
         }
-        $usersJSON = json_encode($usersArray, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        dump($usersJSON);
+
+        $response = Http::post(config('findoml.api_url'), [
+            'user_data' => $usersJSON,
+        ]);
+        */
+        $users_clusters = json_decode(file_get_contents('app/Tasks/raw_response.json'), true);
+        foreach ($users_clusters as $user_cluster) {
+            $user = User::find($user_cluster['user_id']);
+            $user->cluster = $user_cluster['labels'];
+            $user->save();
+        }
     }
 }
