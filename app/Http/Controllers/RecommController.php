@@ -18,13 +18,26 @@ class RecommController extends Controller
 		$odpEvents = ODPEvent::all();
         $eventCount = ODPEvent::count();
 
+        //$idCluster = cluster de la personne connecté
+        //$dataJson = data de l'api flask
+        //$listeUserCluster = liste des users du meme cluster
+
+        //foreach ( ) {
+        //    Recupérer tout les event liké de la listeUsercluster
+            //  $listeEventCluster = 
+            
+        //}
+        
+        //foreach ( ) {
+        //    Supprimer de la liste les events deja liké par le user
+        //}
+
+
+
          // Comptage et listing des tags
 
         $listeTags = ["Clubbing","Atelier","Humour","Concert","Musique","Danse","Théâtre","Conférence","Enfants","Sport","Cinéma","Loisirs","Littérature","Spectacle musical","Balade","Histoire","Nature","Art contemporain","Expo","LGBT","Peinture","Photo","Innovation","Cirque","BD","Sciences","Solidarité","Salon","Street-art","Gourmand"];
         $countTags = array();
-
-        //Recup ce qui est liker par les autres
-
 
 
         foreach ($listeTags  as $tag) {
