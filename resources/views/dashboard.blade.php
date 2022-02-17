@@ -88,7 +88,7 @@
             var data = google.visualization.arrayToDataTable(likeCount);
 
             let options = {
-                title: 'Le nombre de like par type événement', // Le titre
+                title: 'Mes likes selon les événements', // Le titre
                 is3D: true // En 3D
             };
 
@@ -108,11 +108,11 @@
         function drawChart() {
             let countLikeObj = {!! json_encode($likeCount) !!}
             let likeCount = Object.entries(countLikeObj);
-            likeCount.unshift(['Nom du Tag', 'Nombres événements'])
+            likeCount.unshift(['Nom du Tag', 'Nombres de likes pour chaque événements'])
 
             var data = google.visualization.arrayToDataTable(likeCount);
             let options = {
-                title: 'Répartition des tags',
+                title: 'Mes likes selon les événements',
                 bars: 'vertical'
             };
 
